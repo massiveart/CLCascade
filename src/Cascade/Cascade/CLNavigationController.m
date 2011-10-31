@@ -1,16 +1,17 @@
 //
-//  CLViewController.m
-//  Cascade
+//  CLNavigationController.m
+//  TSystems
 //
-//  Created by Emil Wojtaszek on 11-03-26.
-//  Copyright 2011 CreativeLabs.pl. All rights reserved.
+//  Created by Thomas Schedler on 06.10.11.
+//  Copyright 2011 MASSIVE ART WebServices. All rights reserved.
 //
 
-#import "CLViewController.h"
+#import "CLNavigationController.h"
+
 #import "CLCascadeNavigationController.h"
 #import "CLBorderShadowView.h"
 
-@implementation CLViewController
+@implementation CLNavigationController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
 @synthesize viewSize = _viewSize;
@@ -20,23 +21,23 @@
 - (id) init {
     self = [super init];
     if (self) {
-        _viewSize = CLViewSizeNormal;
+        _viewSize = CLViewSizeWider;
         _roundedCorners = NO;
     }
     return self;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        _viewSize = CLViewSizeNormal;
+- (id)initWithRootViewController:(UIViewController *)rootViewController
+{
+    if ((self=[self initWithNibName:nil bundle:nil])) {
+        self.viewControllers = [NSArray arrayWithObject:rootViewController];
+        
+        _viewSize = CLViewSizeWider;
         _roundedCorners = NO;
     }
     return self;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) initWithSize:(CLViewSize)size {
     self = [super init];
     if (self) {
@@ -46,8 +47,6 @@
     return self;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -58,6 +57,11 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)dealloc
+{
+    _cascadeNavigationController = nil;    
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didReceiveMemoryWarning
@@ -72,7 +76,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadView {
-    NSString *nib = self.nibName;
+    [super loadView];
+    
+    
+    /*NSString *nib = self.nibName;
     
     if (nib) {
         NSBundle *bundle = self.nibBundle;
@@ -88,6 +95,16 @@
     
     CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
     self.view = view_;
+    [view_ release];
+    
+    UIViewController *topViewController = self.topViewController;
+    topViewController.view.frame = [view_.contentView frame];
+    topViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view_ setContentView: topViewController.view];
+    
+    [self.navigationBar setFrame: CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    [self.navigationBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [view_ setHeaderView:self.navigationBar];
     
     [view_ setAutoresizingMask:
      UIViewAutoresizingFlexibleLeftMargin | 
@@ -95,8 +112,9 @@
      UIViewAutoresizingFlexibleBottomMargin | 
      UIViewAutoresizingFlexibleTopMargin |
      UIViewAutoresizingFlexibleWidth | 
-     UIViewAutoresizingFlexibleHeight];
+     UIViewAutoresizingFlexibleHeight];*/
 }
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,13 +155,27 @@
 - (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset {
     
     UIView* shadowView = [self leftBorderShadowView];
-    [(CLSegmentedView*)self.view addLeftBorderShadowView:shadowView 
-                                               withWidth:width];    
     
-    [(CLSegmentedView*)self.view setShadowLeftOffset:offset];
+    [self.view setClipsToBounds: NO];
     
+    if (_shadowLeftWidth != width) {
+        _shadowLeftWidth = width;
+        [self.view setNeedsLayout];
+        [self.view setNeedsDisplay];
+    }
+    
+    if (shadowView != _shadowLeftView) {
+        _shadowLeftView = shadowView;
+        
+        [self.view insertSubview:_shadowLeftView atIndex:1];
+        
+        [self.view setNeedsLayout];
+        [self.view setNeedsDisplay];
+    }
+    
+    CGRect shadowFrame = CGRectMake(0 - _shadowLeftWidth + _shadowLeftOffset, 0.0, _shadowLeftWidth, self.view.bounds.size.height);
+    _shadowLeftView.frame = shadowFrame;
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) removeLeftBorderShadow {
@@ -182,13 +214,6 @@
 }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
-    NSAssert(_viewSize != CLViewSizeWider, @"Assert: You can't push a new view from a view which size is CLViewSizeWider.");
-    [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
-}
-
-
 #pragma mark CLViewControllerDelegate
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -207,7 +232,11 @@
      * Called when page (view of this controller) will be shadowed by 
      * another page or will slide out CascadeView bounds
      */
-    
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+{
+    return [super popViewControllerAnimated:animated];
 }
 
 @end

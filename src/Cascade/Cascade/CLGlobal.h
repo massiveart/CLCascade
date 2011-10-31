@@ -8,7 +8,7 @@
 
 
 // here you can change categories view with
-#define CATEGORIES_VIEW_WIDTH 289.0f
+#define CATEGORIES_VIEW_WIDTH 200.0f
 
 // used in WebViewController
 #define DEFAULT_URL @"http://www.google.com"

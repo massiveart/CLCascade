@@ -153,7 +153,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIWebView*) webView {
-    return (UIWebView*)[self.segmentedView contentView];
+    return (UIWebView*)[self.segmentedView content];
 }
 
 

@@ -48,6 +48,11 @@
  */
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
 
+/*
+ * Set main view controller  
+ */
+- (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated;
+
 /* 
  First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
  */

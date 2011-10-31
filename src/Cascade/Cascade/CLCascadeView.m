@@ -51,11 +51,6 @@
 - (void) setProperPositionOfPageAtIndex:(NSInteger)index;
 @end
 
-#define DEFAULT_LEFT_INSET 58.0f
-#define DEFAULT_WIDER_LEFT_INSET 220.0f
-#define PULL_TO_DETACH_FACTOR 0.32f
-#define WTF 11.0f
-
 @implementation CLCascadeView
 
 @synthesize leftInset = _leftInset; 
@@ -139,7 +134,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
 
-    CLViewSize viewSize = [(CLSegmentedView*)newPage viewSize];
+    CLViewSize viewSize = CLViewSizeWider;
+    if([newPage isKindOfClass:[CLSegmentedView class]]) {
+        viewSize = [(CLSegmentedView*)newPage viewSize];   
+    } 
+
 
     if (viewSize == CLViewSizeWider) {
         _flags.hasWiderPage = YES;
@@ -182,7 +181,7 @@
             if (UIInterfaceOrientationIsPortrait(interfaceOrienation)) {
                 [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _widerLeftInset + _leftInset, 0.0f) animated:animated];
             } else {
-                [_scrollView setContentOffset:CGPointMake(index * _pageWidth + _pageWidth  - ([self widerPageWidth]) - _leftInset + _widerLeftInset, 0.0f) animated:animated];
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _widerLeftInset + _leftInset, 0.0f) animated:animated];
             }
         }
     }
@@ -629,7 +628,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGSize) calculatePageSize:(UIView*)view {
-    CLViewSize size = [(CLSegmentedView*)view viewSize];
+    CLViewSize size = CLViewSizeWider;
+    if([view isKindOfClass:[CLSegmentedView class]]) {
+        size = [(CLSegmentedView*)view viewSize];   
+    }
+    
     CGFloat height = _scrollView.frame.size.height;
     CGFloat width = _pageWidth;
     

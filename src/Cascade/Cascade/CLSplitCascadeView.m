@@ -20,6 +20,7 @@
 
 @synthesize categoriesView = _categoriesView;
 @synthesize cascadeView = _cascadeView;
+@synthesize mainView = _mainView;
 @synthesize backgroundView = _backgroundView;
 @synthesize verticalDividerImage = _verticalDividerImage;
 
@@ -29,7 +30,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setupView {
-    [self setBackgroundColor: [UIColor blackColor]];
+    [self setBackgroundColor: [UIColor clearColor]];
+    [self setOpaque:NO];
 }
 
 
@@ -47,7 +49,14 @@
     _dividerWidth = _verticalDividerImage.size.width;
     [_dividerView setBackgroundColor:[UIColor colorWithPatternImage: _verticalDividerImage]];
     
+    [_dividerView.layer setOpaque:NO];
+    [_dividerView setOpaque:NO];
+    
     [_backgroundView addSubview: _dividerView];
+    
+    [_backgroundView.layer setOpaque:NO];
+    [_backgroundView setOpaque:NO];
+    
     [self setNeedsLayout];   
     
 }
@@ -120,7 +129,12 @@
 
     } else {
         CGPoint newPoint = [self convertPoint:point toView:navigationView];
-        return [navigationView hitTest:newPoint withEvent:event];
+
+        if (_mainView) {
+            return [_mainView hitTest:newPoint withEvent:event];
+        } else {
+            return [navigationView hitTest:newPoint withEvent:event];
+        }
     }
         
 }
@@ -131,13 +145,16 @@
     
     CGRect bounds = self.bounds;
     
-    CGRect categoriesFrame = CGRectMake(0.0, 0.0, CATEGORIES_VIEW_WIDTH, bounds.size.height);
+    CGFloat width = (_categoriesView.bounds.size.width == 45.0) ?
+                     _categoriesView.bounds.size.width : CATEGORIES_VIEW_WIDTH;
+    
+    CGRect categoriesFrame = CGRectMake(0.0, 0.0, width, bounds.size.height);
     _categoriesView.frame = categoriesFrame;
     
     CGRect cascadeNavigationFrame = bounds;
     _cascadeView.frame = cascadeNavigationFrame;
 
-    CGRect backgroundViewFrame = CGRectMake(CATEGORIES_VIEW_WIDTH, 0.0, bounds.size.width - CATEGORIES_VIEW_WIDTH, bounds.size.height);
+    CGRect backgroundViewFrame = CGRectMake(width, 0.0, bounds.size.width - width, bounds.size.height);
     _backgroundView.frame = backgroundViewFrame;
 
     CGRect dividerViewFrame = CGRectMake(0.0, 0.0, _dividerWidth, bounds.size.height);
@@ -169,6 +186,29 @@
         [self bringSubviewToFront: _cascadeView];
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setMainView:(UIView *) aView {
+    if (_mainView != aView) {
+        _mainView = aView;
+        
+        [self addSubview: _mainView];        
+        [self bringSubviewToFront: _mainView];
+        [self bringSubviewToFront: _categoriesView];
+    }
+}
+
+- (void) releaseMainView {
+    if (_mainView) {
+        [_mainView removeFromSuperview];
+        _mainView = nil;
+    }
+    
+    if (_cascadeView) {
+        [self bringSubviewToFront: _cascadeView];        
+    }
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

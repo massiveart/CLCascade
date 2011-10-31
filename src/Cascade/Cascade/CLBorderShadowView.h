@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CLBorderShadowView : UIView
+#define DEFAULT_COLORS { 255.0, 255.0, 255.0, 0.0, 0.0, 0.0, 0.0, 0.2 }
+
+
+@interface CLBorderShadowView : UIView {
+    CGFloat _colors[8];
+}
+
+-(void)setColors:(CGFloat[8]) colors;
 
 @end

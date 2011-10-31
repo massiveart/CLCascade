@@ -155,7 +155,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UITableView*) tableView {
-    return (UITableView*)[self.segmentedView contentView];
+    return (UITableView*)[self.segmentedView content];
 }
 
 #pragma mark -

@@ -15,14 +15,16 @@
 
 @implementation CLSegmentedView
 
-@synthesize footerView = _footerView;
-@synthesize headerView = _headerView;
-@synthesize contentView = _contentView;
-@synthesize shadowWidth = _shadowWidth;
+@synthesize footer = _footerView;
+@synthesize header = _headerView;
+@synthesize content = _contentView;
+@synthesize shadowLeftWidth = _shadowLeftWidth;
+@synthesize shadowLeftOffset = _shadowLeftOffset;
+@synthesize shadowRightWidth = _shadowRightWidth;
+@synthesize shadowRightOffset = _shadowRightOffset;
 @synthesize viewSize = _viewSize;
 @synthesize showRoundedCorners = _showRoundedCorners;
 @synthesize rectCorner = _rectCorner;
-@synthesize shadowOffset = _shadowOffset;
 
 #pragma mark - Init & dealloc
 
@@ -124,19 +126,19 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addLeftBorderShadowView:(UIView *)view withWidth:(CGFloat)width {
-
+    
     [self setClipsToBounds: NO];
-
-    if (_shadowWidth != width) {
-        _shadowWidth = width;
+    
+    if (_shadowLeftWidth != width) {
+        _shadowLeftWidth = width;
         [self setNeedsLayout];
         [self setNeedsDisplay];
     }
-
-    if (view != _shadowView) {
-        _shadowView = view;
+    
+    if (view != _shadowLeftView) {
+        _shadowLeftView = view;
         
-        [self insertSubview:_shadowView atIndex:0];
+        [self insertSubview:_shadowLeftView atIndex:0];
         
         [self setNeedsLayout];
         [self setNeedsDisplay];
@@ -146,10 +148,42 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) removeLeftBorderShadowView {
-
+    
     [self setClipsToBounds: YES];
+    
+    _shadowLeftView = nil;
+    [self setNeedsLayout];
+    
+}
 
-    _shadowView = nil;
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addRightBorderShadowView:(UIView *)view withWidth:(CGFloat)width {
+    
+    [self setClipsToBounds: NO];
+    
+    if (_shadowRightWidth != width) {
+        _shadowRightWidth = width;
+        [self setNeedsLayout];
+        [self setNeedsDisplay];
+    }
+    
+    if (view != _shadowRightView) {
+        _shadowRightView = view;
+        
+        [self insertSubview:_shadowRightView atIndex:0];
+        
+        [self setNeedsLayout];
+        [self setNeedsDisplay];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeRightBorderShadowView {
+    
+    [self setClipsToBounds: YES];
+    
+    _shadowRightView = nil;
     [self setNeedsLayout];
     
 }
@@ -208,9 +242,14 @@
     
     [_contentView setFrame: CGRectMake(0.0, headerHeight, viewWidth, viewHeight - headerHeight - footerHeight)];
 
-    if (_shadowView) {
-        CGRect shadowFrame = CGRectMake(0 - _shadowWidth + _shadowOffset, 0.0, _shadowWidth, rect.size.height);
-        _shadowView.frame = shadowFrame;
+    if (_shadowLeftView) {
+        CGRect shadowFrame = CGRectMake(0 - _shadowLeftWidth + _shadowLeftOffset, 0.0, _shadowLeftWidth, rect.size.height);
+        _shadowLeftView.frame = shadowFrame;
+    }
+    
+    if (_shadowRightView) {
+        CGRect shadowFrame = CGRectMake(rect.size.width + _shadowRightOffset, 0.0, _shadowRightWidth, rect.size.height);
+        _shadowRightView.frame = shadowFrame;
     }
 
     [self updateRoundedCorners];
@@ -220,12 +259,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    _footerView = nil;
-    _headerView = nil;
-    _contentView = nil;
     _roundedCornersView = nil;
-    _shadowView = nil;
-
+    _shadowLeftView = nil;
+    _shadowRightView = nil;
 }
 
 #pragma mark

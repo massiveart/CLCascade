@@ -8,6 +8,8 @@
 
 #import "CLCascadeNavigationController.h"
 
+#import "CLSplitCascadeView.h"
+
 @interface CLCascadeNavigationController (Private)
 - (void) addPagesRoundedCorners;
 - (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index;
@@ -236,6 +238,8 @@
     [_cascadeView popAllPagesAnimated: animated];
     // remove all controllers
     [self removeAllPageViewControllers];
+    // release main view    
+    [(CLSplitCascadeView*)[self.parentViewController view] releaseMainView];
     // add root view controller
     [self addViewController:viewController sender:nil animated:animated];
 }
@@ -287,6 +291,26 @@
     return nil;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated {
+    // pop all pages
+    [_cascadeView popAllPagesAnimated: animated];
+    // remove all controllers
+    [_viewControllers removeAllObjects];
+    
+    // add main view controller
+    [self.viewControllers addObject: viewController];
+    
+    CGRect baseFrame = [[(CLSplitCascadeView*)[self.parentViewController view] cascadeView] frame];
+    
+    CGRect frame = CGRectMake(0.0, 0.0, baseFrame.size.width,baseFrame.size.height);
+    
+    // set new page frame
+    [viewController.view setFrame: frame];
+    
+    //[_cascadeView addSubview:viewController.view];
+    [(CLSplitCascadeView*)[self.parentViewController view] setMainView: viewController.view];
+}
 
 #pragma mark -
 #pragma mark Private

@@ -15,6 +15,7 @@
     // views
     UIView* _categoriesView;
     UIView* _cascadeView;
+    UIView* _mainView;
      
     // background
     UIView*     _backgroundView;
@@ -48,5 +49,11 @@
  */
 @property (nonatomic, strong) UIView* cascadeView;
 
+/*
+ * Main content view
+ */
+@property (nonatomic, strong) UIView* mainView;
+
+- (void) releaseMainView;
 
 @end

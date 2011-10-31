@@ -1,26 +1,34 @@
 //
-//  CLViewController.h
-//  Cascade
+//  CLNavigationController.h
+//  TSystems
 //
-//  Created by Emil Wojtaszek on 11-03-26.
-//  Copyright 2011 CreativeLabs.pl. All rights reserved.
+//  Created by Thomas Schedler on 06.10.11.
+//  Copyright 2011 MASSIVE ART WebServices. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import "CLSegmentedView.h"
-#import "UIViewController+CLSegmentedView.h"
+#import "UIView+CLView.h"
 #import "CLViewControllerDelegate.h"
 #import "CLGlobal.h"
 
 @class CLCascadeNavigationController;
 
-@interface CLViewController : UIViewController <CLViewControllerDelegate> {
+@interface CLNavigationController : UINavigationController  <CLViewControllerDelegate> {
     CLCascadeNavigationController* _cascadeNavigationController;
-
+    
     CLViewSize _viewSize;
     BOOL _roundedCorners;
+    
+    CGFloat _shadowLeftWidth;
+    CGFloat _shadowLeftOffset;
+    UIView* _shadowLeftView;
+    
+    CGFloat _shadowRightWidth;
+    CGFloat _shadowRightOffset;
+    UIView* _shadowRightView;
 }
 
 - (id) initWithSize:(CLViewSize)size;
@@ -29,9 +37,6 @@
 @property (nonatomic, strong) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
 @property (nonatomic, assign) CLViewSize viewSize;
 @property (nonatomic, assign) BOOL showRoundedCorners;
-
-// method used to push (animated) new UIViewController on Cascade stack
-- (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
 
 // Outer left shadow methods
 - (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset;
@@ -54,5 +59,6 @@
  to draw gradient in Core Animation.
  */
 - (UIView *) rightBorderShadowView;
+
 
 @end

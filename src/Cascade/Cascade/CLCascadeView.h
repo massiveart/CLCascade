@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "CLScrollView.h"
 
+#define DEFAULT_LEFT_INSET 44.0f
+#define DEFAULT_WIDER_LEFT_INSET 360.0f
+#define PULL_TO_DETACH_FACTOR 0.32f
+#define WTF 11.0f
+
 @protocol CLCascadeViewDataSource;
 @protocol CLCascadeViewDelegate;
 

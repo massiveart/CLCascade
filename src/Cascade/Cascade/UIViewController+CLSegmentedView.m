@@ -29,7 +29,7 @@
     if (![self.view isKindOfClass:[CLSegmentedView class]]) return nil;
     
     CLSegmentedView* view_ = (CLSegmentedView*)self.view;
-    return view_.headerView;
+    return view_.header;
 }
 
 
@@ -39,7 +39,7 @@
     if (![self.view isKindOfClass:[CLSegmentedView class]]) return nil;
     
     CLSegmentedView* view_ = (CLSegmentedView*)self.view;
-    return view_.footerView;
+    return view_.footer;
 }
 
 
@@ -48,7 +48,7 @@
     if (![self.view isKindOfClass:[CLSegmentedView class]]) return self.view;
 
     CLSegmentedView* view_ = (CLSegmentedView*)self.view;
-    return view_.contentView;
+    return view_.content;
 }
 
 @end
