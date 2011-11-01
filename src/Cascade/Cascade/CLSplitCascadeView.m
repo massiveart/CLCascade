@@ -154,7 +154,7 @@
     CGRect cascadeNavigationFrame = bounds;
     _cascadeView.frame = cascadeNavigationFrame;
 
-    CGRect backgroundViewFrame = CGRectMake(width, 0.0, bounds.size.width - width, bounds.size.height);
+    CGRect backgroundViewFrame = CGRectMake(0.0, 0.0, bounds.size.width, bounds.size.height);
     _backgroundView.frame = backgroundViewFrame;
 
     CGRect dividerViewFrame = CGRectMake(0.0, 0.0, _dividerWidth, bounds.size.height);
@@ -227,12 +227,7 @@
         [_dividerView removeFromSuperview];
         _dividerView = nil;
         
-        if (_cascadeView == nil) {
-            [self addSubview: _backgroundView];
-        } else {
-            NSUInteger index = [self.subviews indexOfObject: _cascadeView];
-            [self insertSubview:_backgroundView atIndex:index];
-        }
+        [self insertSubview:_backgroundView atIndex:0];
 
         [self addDivierView];
     }
