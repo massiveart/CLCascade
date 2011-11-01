@@ -190,6 +190,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setMainView:(UIView *) aView {
     if (_mainView != aView) {
+        [self releaseMainView];
+        
         _mainView = aView;
         
         [self addSubview: _mainView];        
@@ -206,6 +208,12 @@
     
     if (_cascadeView) {
         [self bringSubviewToFront: _cascadeView];        
+    }
+}
+
+- (void) bringMainViewToFront {
+    if (_mainView) {
+        [self bringSubviewToFront:_mainView];
     }
 }
 

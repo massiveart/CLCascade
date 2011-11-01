@@ -56,4 +56,6 @@
 
 - (void) releaseMainView;
 
+- (void) bringMainViewToFront;
+
 @end

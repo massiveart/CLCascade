@@ -13,6 +13,8 @@
 #import "CLViewControllerDelegate.h"
 #import "CLGlobal.h"
 
+@class CLSplitCascadeViewController;
+
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
     // array of all view controllers
     // todo: in ios5 use childViewControllers
@@ -21,6 +23,8 @@
     // view containing all views on stack
     CLCascadeView* _cascadeView;
 }
+
+@property (nonatomic, strong) CLSplitCascadeViewController* parentSplitViewController;
 
 /*
  List of CLViewControllers on stock.

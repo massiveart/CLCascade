@@ -22,6 +22,8 @@
 @synthesize viewControllers = _viewControllers;
 @synthesize leftInset, widerLeftInset;
 
+@synthesize parentSplitViewController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -239,7 +241,7 @@
     // remove all controllers
     [self removeAllPageViewControllers];
     // release main view    
-    [(CLSplitCascadeView*)[self.parentViewController view] releaseMainView];
+    [(CLSplitCascadeView*)[self.parentSplitViewController view] releaseMainView];
     // add root view controller
     [self addViewController:viewController sender:nil animated:animated];
 }
@@ -301,15 +303,14 @@
     // add main view controller
     [self.viewControllers addObject: viewController];
     
-    CGRect baseFrame = [[(CLSplitCascadeView*)[self.parentViewController view] cascadeView] frame];
+    CGRect baseFrame = [[(CLSplitCascadeView*)[self.parentSplitViewController view] cascadeView] frame];
     
     CGRect frame = CGRectMake(0.0, 0.0, baseFrame.size.width,baseFrame.size.height);
     
     // set new page frame
     [viewController.view setFrame: frame];
     
-    //[_cascadeView addSubview:viewController.view];
-    [(CLSplitCascadeView*)[self.parentViewController view] setMainView: viewController.view];
+    [(CLSplitCascadeView*)[self.parentSplitViewController view] setMainView: viewController.view];
 }
 
 #pragma mark -
