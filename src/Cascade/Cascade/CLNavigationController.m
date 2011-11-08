@@ -108,7 +108,8 @@
      UIViewAutoresizingFlexibleBottomMargin | 
      UIViewAutoresizingFlexibleTopMargin |
      UIViewAutoresizingFlexibleWidth | 
-     UIViewAutoresizingFlexibleHeight];*/
+     UIViewAutoresizingFlexibleHeight];
+     */
 }
 
 

@@ -294,7 +294,7 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated {
+- (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated withFrameReset:(BOOL)frameReset {
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
     // remove all controllers
@@ -304,8 +304,12 @@
     [self.viewControllers addObject: viewController];
     
     CGRect baseFrame = [[(CLSplitCascadeView*)[self.parentSplitViewController view] cascadeView] frame];
-    
-    CGRect frame = CGRectMake(0.0, 0.0, baseFrame.size.width,baseFrame.size.height);
+
+    CGRect frame = CGRectMake(viewController.view.frame.origin.x, viewController.view.frame.origin.y, 
+                              baseFrame.size.width - viewController.view.frame.origin.x, baseFrame.size.height - viewController.view.frame.origin.y);
+    if (frameReset) {    
+        frame = CGRectMake(0.0, 0.0, baseFrame.size.width, baseFrame.size.height);    
+    }
     
     // set new page frame
     [viewController.view setFrame: frame];

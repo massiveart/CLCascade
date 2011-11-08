@@ -55,7 +55,7 @@
 /*
  * Set main view controller  
  */
-- (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated;
+- (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated withFrameReset:(BOOL)frameReset;
 
 /* 
  First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
