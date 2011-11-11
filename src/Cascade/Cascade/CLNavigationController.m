@@ -233,7 +233,9 @@
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
-    return [super popViewControllerAnimated:animated];
+    return [super popViewControllerAnimated:NO];
 }
+
+
 
 @end
