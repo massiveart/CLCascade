@@ -217,6 +217,12 @@
     }
 }
 
+- (void) bringCategoriesViewToFront {
+    if (_categoriesView) {
+        [self bringSubviewToFront:_categoriesView];
+        
+    }
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

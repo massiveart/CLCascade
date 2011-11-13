@@ -58,4 +58,6 @@
 
 - (void) bringMainViewToFront;
 
+- (void) bringCategoriesViewToFront;
+
 @end
