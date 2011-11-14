@@ -304,7 +304,9 @@
     [self.viewControllers addObject: viewController];
     
     CGRect baseFrame = [[(CLSplitCascadeView*)[self.parentSplitViewController view] cascadeView] frame];
-
+    baseFrame.size.width =  baseFrame.size.width + baseFrame.origin.x;
+    baseFrame.size.height =  baseFrame.size.height + baseFrame.origin.y;
+    
     CGRect frame = CGRectMake(viewController.view.frame.origin.x, viewController.view.frame.origin.y, 
                               baseFrame.size.width - viewController.view.frame.origin.x, baseFrame.size.height - viewController.view.frame.origin.y);
     if (frameReset) {    
