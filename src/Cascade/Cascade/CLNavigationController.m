@@ -98,7 +98,7 @@
     topViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view_ setContentView: topViewController.view];
     
-    [self.navigationBar setFrame: CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    [self.navigationBar setFrame: CGRectMake(0, 0, self.view.bounds.size.width, 50)];
     [self.navigationBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [view_ setHeaderView:self.navigationBar];
     

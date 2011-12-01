@@ -33,17 +33,17 @@
 /*
  * Header view - located on the top of view
  */
-@property (nonatomic, strong, readonly) IBOutlet UIView* header;
+@property (nonatomic, strong) IBOutlet UIView* header;
 
 /*
  * Footer view - located on the bottom of view
  */
-@property (nonatomic, strong, readonly) IBOutlet UIView* footer;
+@property (nonatomic, strong) IBOutlet UIView* footer;
 
 /*
  * Content view - located between header and footer view 
  */
-@property (nonatomic, strong, readonly) IBOutlet UIView* content;
+@property (nonatomic, strong) IBOutlet UIView* content;
 
 /*
  * The width of the shadow left
