@@ -295,15 +295,18 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated withFrameReset:(BOOL)frameReset {
+    // remove all controllers
+    [self removeAllPageViewControllers];
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
-    // remove all controllers
-    [_viewControllers removeAllObjects];
     
     // add main view controller
     [self.viewControllers addObject: viewController];
     
     CGRect baseFrame = [[(CLSplitCascadeView*)[self.parentSplitViewController view] cascadeView] frame];
+    if(baseFrame.size.width == 0 || baseFrame.size.height == 0){
+        baseFrame = [[self.parentSplitViewController view] frame];
+    }
     baseFrame.size.width =  baseFrame.size.width + baseFrame.origin.x;
     baseFrame.size.height =  baseFrame.size.height + baseFrame.origin.y;
     
