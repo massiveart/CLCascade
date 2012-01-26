@@ -32,6 +32,7 @@
 
 // method used to push (animated) new UIViewController on Cascade stack
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
+- (void) removeTopdViewControllerAnimated:(BOOL)animated;
 
 // Outer left shadow methods
 - (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset;

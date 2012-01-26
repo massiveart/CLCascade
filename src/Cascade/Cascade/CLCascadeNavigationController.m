@@ -283,6 +283,12 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeTopdViewControllerAnimated:(BOOL)animated {
+	[_cascadeView popPageAtIndex:([self.viewControllers count] -1) animated:animated];
+	[self.viewControllers removeObject:[self.viewControllers objectAtIndex:([self.viewControllers count] -1)]];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*) firstVisibleViewController {
     NSInteger index = [_cascadeView indexOfFirstVisibleView: YES];
 

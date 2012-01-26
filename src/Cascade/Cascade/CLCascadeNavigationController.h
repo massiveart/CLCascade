@@ -53,6 +53,11 @@
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
 
 /*
+ * Remove top view controller
+ */
+- (void) removeTopdViewControllerAnimated:(BOOL)animated;
+
+/*
  * Set main view controller  
  */
 - (void) setMainViewController:(UIViewController*)viewController animated:(BOOL)animated withFrameReset:(BOOL)frameReset;

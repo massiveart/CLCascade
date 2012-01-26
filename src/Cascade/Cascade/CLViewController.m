@@ -188,6 +188,9 @@
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
+- (void) removeTopdViewControllerAnimated:(BOOL)animated {
+	[self.cascadeNavigationController removeTopdViewControllerAnimated:animated];
+}
 
 #pragma mark CLViewControllerDelegate
 
