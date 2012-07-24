@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import <Cascade/CLCustomViewControllers/CLViewControllerDelegate.h>
-#import <Cascade/Other/CLGlobal.h>
+#import "CLViewControllerDelegate.h"
+#import "CLSegmentedView.h"
+#import "UIViewController+CLSegmentedView.h"
+#import "CLGlobal.h"
 
 @class CLSegmentedView;
 @class CLViewControllerDelegate;

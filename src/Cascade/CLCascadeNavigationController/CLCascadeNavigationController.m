@@ -9,6 +9,7 @@
 #import "CLCascadeNavigationController.h"
 
 #import "CLSplitCascadeView.h"
+#import "CLSplitCascadeViewController.h"
 #import "CLViewController.h"
 #import "CLSegmentedView.h"
 

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Cascade/CLCustomViewControllers/CLTableViewController.h>
-#import <Cascade/CLCategories/CLCategoriesView.h>
-#import <Cascade/CLCascadeNavigationController/CLCascadeNavigationController.h>
+#import "CLTableViewController.h"
+#import "CLCategoriesView.h"
+#import "CLCascadeNavigationController.h"
 
 @interface CLCategoriesViewController : CLTableViewController {
 

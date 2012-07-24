@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Cascade/CLCustomViewControllers/CLViewController.h>
+#import "CLViewController.h"
 
 
 @interface CLTableViewController : CLViewController <UITableViewDataSource, UITableViewDelegate> {

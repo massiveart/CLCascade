@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Cascade/CLCascadeNavigationController/CLCascadeView.h>
+#import "CLCascadeView.h"
 
 @class CLViewController;
 
@@ -22,7 +22,7 @@
     CLCascadeView* _cascadeView;
 }
 
-@property (nonatomic, strong) UIViewController* parentSplitViewController;
+@property (nonatomic, strong) CLSplitCascadeViewController* parentSplitViewController;
 
 /*
  List of CLViewControllers on stock.

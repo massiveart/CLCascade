@@ -114,31 +114,28 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    id item = nil;
+
     // create enumerator
     NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
-    // enumarate pages
     UIView *view = nil;
     
-    while ((item = [enumerator nextObject])) {
-        if (item != [NSNull null]) {
-            
-            UIView* page = (UIView*)item;
-            CGRect rect = [_scrollView convertRect:page.frame toView:self];
-            
-            if (CGRectContainsPoint(rect, point)) {
-                CGPoint newPoint = [self convertPoint:point toView:page];
-                view = [page hitTest:newPoint withEvent:event]; break;
+    for (UIView *item in [enumerator allObjects]) {
+        if(item != nil){
+            CGRect rect = [_scrollView convertRect:item.frame toView:self];    
+            if(CGRectContainsPoint(rect, point)){
+                CGPoint newPoint = [self convertPoint:point toView:item];
+                view = [item hitTest:newPoint withEvent:event];
+                break;
             }
         }
-    } 
+    }
     
     // bug fix: @YuriSarkisyan
     if (view != nil) {
         return view;
     }
     
-    return [super hitTest:point withEvent:event];
+    return [super hitTest:point withEvent:event];    
 }
 
 #pragma mark -

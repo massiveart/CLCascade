@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Cascade/Other/CLScrollView.h>
+#import "CLScrollView.h"
 
 #define DEFAULT_LEFT_INSET 60.0f
 #define DEFAULT_WIDER_LEFT_INSET 360.0f

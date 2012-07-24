@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Cascade/Other/CLSegmentedView.h>
+#import "CLSegmentedView.h"
 
 @interface CLCategoriesView : CLSegmentedView {
     

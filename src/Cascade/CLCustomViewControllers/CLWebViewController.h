@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Cascade/CLCustomViewControllers/CLViewController.h>
+#import "CLViewController.h"
 
 @interface CLWebViewController : CLViewController <UIWebViewDelegate> {
     UIActivityIndicatorView* _activityIndicatorView;

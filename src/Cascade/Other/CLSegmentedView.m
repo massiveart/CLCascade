@@ -55,7 +55,6 @@
     return self;
 }
 
-
 #pragma mark -
 #pragma mark Setters
 
