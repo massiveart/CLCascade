@@ -104,7 +104,7 @@ static CGFloat kTopOffset = 10.0f;
 - (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView {
     [super cascadeViewDidPullToDetachPages:cascadeView];
     
-    id view = [[(CLViewController*)self.rootViewController segmentedView] contentView];
+    id view = [[(CLViewController*)self.rootViewController segmentedView] content];
     if ([view isKindOfClass:[UITableView class]]) {
         UITableView* tableView = (UITableView*)view;
         NSIndexPath* indexPath = [tableView indexPathForSelectedRow];
